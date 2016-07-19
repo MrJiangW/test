@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react eventListener</title>
+	<script src="build/react.js"></script>
+	<script src="build/react-dom.js"></script>
+	<script src="build/browser.min.js"></script>
+	<style>
+	*{margin:0;padding: 0;}
+	.ipt{height: 30px;line-height: 30px;width: 133px;border-radius: 3px;border:1px solid #ddd;text-indent: 10px;outline: 0;}
+	.btn{height: 32px;line-height: 32px;border-radius: 3px;border:none;outline: none;margin-left: 10px;padding:0 10px; color: #fff;background: #4395ff;}
+	body>div{margin-bottom: 15px;padding-bottom: 15px;padding-top: 15px;border-bottom: 2px dashed #ddd;}
+	.ml10{margin-left: 10px;}
+	</style>
+</head>
+<body>
+	<!-- event listener -->
+	<div id="container"></div>
+	<script type="text/babel">
+		var TestClickComponent = React.createClass({
+			handleClick:function(event){
+				var tipE = ReactDOM.findDOMNode(this.refs.tip);
+				if(tipE.style.display == 'none'){
+					tipE.style.display = 'inline';
+				}else{
+					tipE.style.display = 'none';
+				}
+
+				event.stopPropagation();
+				event.preventDefault();
+			},
+			render:function(){
+				return (
+					<div>
+						<button className='btn' onClick={this.handleClick}>show | hide</button>
+						<span ref='tip'>click test!</span>
+					</div>
+				)
+			}
+		});
+		var TestInputComponent = React.createClass({
+			getInitialState:function(){
+				return {
+					inputContent:''
+				}
+			},
+			changeHandle:function(event){
+				this.setState({
+					inputContent:event.target.value
+				});
+
+				event.preventDefault();
+				event.stopPropagation();
+			},
+			render:function(){
+				return (
+					<div>
+						<input type="text" onChange={this.changeHandle} className='ipt ml10' /><span>{this.state.inputContent}</span>
+					</div>
+				)
+			}
+		});
+
+		ReactDOM.render(
+			<div>
+				<TestClickComponent />
+				<br />
+				<TestInputComponent />
+			</div>,
+			document.getElementById('container')
+		)
+	</script>
+
+	<div id="likebtn"></div>
+	<script type="text/babel">
+		var LikeButton = React.createClass({
+			getInitialState:function(){
+				return {
+					liked:false
+				}
+			},
+			clickHandle:function(){
+				this.setState({liked:!this.state.liked})
+			},
+			render:function(){
+				var text = this.state.liked ? 'like':'haven\'t like';
+				return (
+					<p onClick={this.clickHandle}>
+						You {text} this. Click to toggle.
+					</p>
+				)			
+			}
+		});
+		ReactDOM.render(
+			<LikeButton />,
+			document.getElementById('likebtn')
+		)
+	</script>
+	<div id="example"></div>
+	<div id="FancyCheckbox"></div>
+	<script type="text/babel">
+		// 设置默认值 getDefaultProps
+		var ComponentWithDefaultProps = React.createClass({
+		  getDefaultProps: function() {
+		    return {
+		      value: 'default value'
+		    };
+		  },
+		  /* ... */
+			render:function(){
+				return (<a>ddd</a>)
+			}
+		});
+
+
+		var CheckLink = React.createClass({
+		  render: function() {
+		    // {...this.props}把 CheckList 所有的 props 复制到 <a> this.props.children 复制标签子内容
+		    return <a {...this.props}>{'√ '}{this.props.children}</a>;
+		  }
+		});
+
+		ReactDOM.render(
+		  <CheckLink href="/checked.html" data-dd='123'>
+		    Click here!
+		  </CheckLink>,
+		  document.getElementById('example')
+		);
+
+		
+		var FancyCheckbox = React.createClass({
+		  render: function() {
+		    var { checked, ...other } = this.props;
+		    var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+		    // `other` 包含 { onClick: console.log } 但 checked 属性除外
+		    return (
+		      <div {...other} className={fancyClass} />
+		    );
+		  }
+		});
+		ReactDOM.render(
+		  <FancyCheckbox checked={true} onClick={console.log.bind(console)}>
+		    Hello world!
+		  </FancyCheckbox>,
+		  document.getElementById('FancyCheckbox')
+		);
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "glup",
+  "version": "1.0.0",
+  "description": "first_test",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-less": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jiangwanwei",
+  "license": "ISC"
+}
