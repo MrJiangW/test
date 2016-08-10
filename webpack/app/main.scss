@@ -1,0 +1,17 @@
+$color:green;
+body{
+	background: $color;
+	transition: all .3s;
+
+	#app{
+		background:#057905;
+		padding:20px;
+		&:before{
+			content: "";
+			float: left;
+			width: 10px;
+			height: 10px;
+			background:#000;
+		}
+	}
+}

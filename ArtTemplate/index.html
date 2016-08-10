@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>artTemplate</title>
+	<script src="js/template.js"></script>
+	<script src="tpl/build/template.js"></script>
+</head>
+<body>
+	<div id="content"></div>
+	<div id="content1"></div>
+	<div id="content2"></div>
+	<!-- <script id="tpl" type="text/html"></script> -->
+	<!-- <script id="test" type="text/html">
+		
+	</script> -->
+	<script>
+		var data = {
+		    title: '标签',
+		    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+		};
+		var html = template('./tpl/main',data);
+		document.getElementById('content').innerHTML = html;
+
+		// compile
+		// var source = '<ul>'
+		// +    '{{each list as value i}}'
+		// +        '<li>索引 {{i + 1}} ：{{value}}</li>'
+		// +    '{{/each}}'
+		// + '</ul>';
+
+		// var render = template.compile(source);
+		// var html = render({
+		//     list: ['摄影', '电影', '民谣', '旅行', '吉他']
+		// });
+		// document.getElementById('content1').innerHTML = html;
+
+
+	</script>
+</body>
+</html>
